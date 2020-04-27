@@ -1,0 +1,3 @@
+sudo ./jicofo.sh --host=localhost --domain=meet.example.com --secret=meet12345 --user_domain=auth.meet.example.com --user_name=focus --user_password=meet12345
+
+sudo ./jvb.sh --host=localhost --domain=meet.example.com --port=5347 --secret=meet12345
