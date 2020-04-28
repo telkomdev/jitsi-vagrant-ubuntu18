@@ -2,10 +2,10 @@
 
 - Vagrant (https://www.vagrantup.com/):
 
-```shell
-$ vagrant up
-$ vagrant ssh
-```
+    ```shell
+    $ vagrant up
+    $ vagrant ssh
+    ```
 
 - Install Prosody
 https://www.linuxbabe.com/ubuntu/install-configure-prosody-xmpp-server-ubuntu-20-04
