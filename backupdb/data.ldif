@@ -1,0 +1,48 @@
+dn: cn=andy,dc=meet,dc=example,dc=com
+objectclass: inetOrgPerson
+cn: andy
+givenname: andy
+sn: Andy
+displayname: Andy Rae
+mail: andy@gmail.com
+mobile: 0822667722
+userpassword: andy_pass
+
+dn: cn=bony,dc=meet,dc=example,dc=com
+objectclass: inetOrgPerson
+cn: bony
+givenname: bony
+sn: Bony
+displayname: Bony Banjar
+mail: bony@gmail.com
+mobile: 0822667733
+userpassword: bony_pass
+
+dn: cn=rob,dc=meet,dc=example,dc=com
+objectclass: inetOrgPerson
+cn: rob
+givenname: rob
+sn: Rob
+displayname: Rob Stark
+mail: rob@gmail.com
+mobile: 0822667752
+userpassword: rob_pass
+
+dn: ou=IT,dc=meet,dc=example,dc=com
+objectclass: organizationalUnit
+ou: IT
+
+dn: ou=HR,dc=meet,dc=example,dc=com
+objectclass: organizationalUnit
+ou: HR
+
+dn: cn=Admins,ou=HR,dc=meet,dc=example,dc=com
+cn: Admins
+objectclass: groupOfUniqueNames
+uniqueMember: cn=rob,dc=meet,dc=example,dc=com
+
+dn: cn=Maintaners,ou=IT,dc=meet,dc=example,dc=com
+cn: Maintaners
+objectclass: groupOfUniqueNames
+uniqueMember: cn=bony,dc=meet,dc=example,dc=com
+uniqueMember: cn=andy,dc=meet,dc=example,dc=com

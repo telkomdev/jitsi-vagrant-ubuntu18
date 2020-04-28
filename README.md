@@ -21,3 +21,6 @@ https://linoxide.com/linux-how-to/install-openldap-phpldapadmin-nginx-server/
 
 - Install PHP fpm for phpldapadmin
 https://www.interserver.net/tips/kb/nginx-php-fpm-ubuntu-16-04-18-04/
+
+- Install Postgresql
+https://github.com/telkomdev/jitsi-vagrant-ubuntu18/blob/master/install-postgresql.md

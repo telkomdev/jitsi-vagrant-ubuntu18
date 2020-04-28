@@ -208,4 +208,6 @@ certificates = "certs"
 --Component "gateway.example.com"
 --	component_secret = "password"
 
+consider_bosh_secure = true
+
 Include "conf.d/*.cfg.lua"
