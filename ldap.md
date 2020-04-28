@@ -1,6 +1,9 @@
 ## OPENLDAP
 
-### Install Dependencies
+### Install openldap
+https://linoxide.com/linux-how-to/install-openldap-phpldapadmin-nginx-server/
+
+### Install `prosody` ldap Dependencies
 ```shell
 $ sudo apt-get install prosody-modules lua-ldap
 ```
