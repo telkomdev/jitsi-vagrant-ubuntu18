@@ -25,7 +25,16 @@ VirtualHost "auth.meet.example.com"
     -- authentication using ldap
     authentication = "ldap2"
 
+Component "internal-muc.meet.example.com" "muc"
+    modules_enabled = {
+        "ping";
+        
+    }
+    storage = "memory"
+    muc_room_cache_size = 1000
+
 Component "conference.meet.example.com" "muc"
+
 Component "muc.meet.example.com" "muc"
     storage = "memory"
     modules_enabled = {
