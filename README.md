@@ -1,6 +1,6 @@
 ### Jitsi X Prosody X Vagrant
 
-Vagrant:
+- Vagrant (https://www.vagrantup.com/):
 
 ```shell
 $ vagrant up
