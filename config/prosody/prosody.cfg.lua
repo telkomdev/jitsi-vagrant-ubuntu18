@@ -92,6 +92,7 @@ modules_disabled = {
 
 -- Disable account creation by default, for security
 -- For more information see https://prosody.im/doc/creating_accounts
+-- https://prosody.im/doc/modules/mod_register
 allow_registration = true
 
 cross_domain_bosh = true
@@ -128,7 +129,7 @@ pidfile = "/var/run/prosody/prosody.pid"
 -- Select the authentication backend to use. The 'internal' providers
 -- use Prosody's configured data storage to store the authentication data.
 
-authentication = "internal_plain"
+authentication = "internal_hashed"
 
 -- Select the storage backend to use. By default Prosody uses flat files
 -- in its configured data directory, but it also supports more backends

@@ -1,7 +1,7 @@
 admins = { "focus@auth.meet.example.com" }
 
 VirtualHost "meet.example.com"
-    --authentication = "internal_plain"
+    --authentication = "internal_hashed"
 
     -- authentication using ldap
     authentication = "ldap2"
@@ -20,7 +20,7 @@ VirtualHost "auth.meet.example.com"
         key = "/var/lib/prosody/auth.meet.example.com.key";
         certificate = "/var/lib/prosody/auth.meet.example.com.crt";
     }
-    --authentication = "internal_plain"
+    --authentication = "internal_hashed"
 
     -- authentication using ldap
     authentication = "ldap2"
