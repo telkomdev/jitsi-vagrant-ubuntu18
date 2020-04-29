@@ -3,6 +3,7 @@
 
 1. Solution (1)
     <p>If you are using prosody version <b>0.11</b> or higher, currently this version do not support database connectivity. The solution is downgrade to version <b>0.10</b></p>
+    
     ```shell
     $ sudo wget http://archive.ubuntu.com/ubuntu/pool/universe/p/prosody/prosody_0.10.0-1build1_amd64.deb
     $ sudo apt install ./prosody_0.10.0-1build1_amd64.deb
