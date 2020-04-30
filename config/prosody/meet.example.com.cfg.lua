@@ -23,7 +23,10 @@ VirtualHost "auth.meet.example.com"
     --authentication = "internal_hashed"
 
     -- authentication using ldap
-    authentication = "ldap2"
+    -- authentication = "ldap2"
+    -- https://hg.prosody.im/prosody-modules/file/tip/mod_auth_custom_http/mod_auth_custom_http.lua
+    authentication = "custom_http"
+    auth_custom_http = { post_url = "http://10.0.2.2:8000/auth/login-prosody"; }
 
 Component "internal-muc.meet.example.com" "muc"
     modules_enabled = {
