@@ -1,10 +1,12 @@
 admins = { "focus@auth.meet.example.com" }
 
 VirtualHost "meet.example.com"
-    --authentication = "internal_hashed"
+    authentication = "custom_http"
+    auth_custom_http = { post_url = "http://10.0.2.2:8000/auth/login"; }
+    -- authentication = "internal_hashed"
 
     -- authentication using ldap
-    authentication = "ldap2"
+    -- authentication = "ldap2"
     ssl = {
         key = "/var/lib/prosody/meet.example.com.key";
         certificate = "/var/lib/prosody/meet.example.com.crt";
@@ -20,18 +22,17 @@ VirtualHost "auth.meet.example.com"
         key = "/var/lib/prosody/auth.meet.example.com.key";
         certificate = "/var/lib/prosody/auth.meet.example.com.crt";
     }
-    --authentication = "internal_hashed"
-
+    -- authentication = "internal_hashed"
+    --
+    authentication = "custom_http"
+    auth_custom_http = { post_url = "http://10.0.2.2:8000/auth/login"; }
     -- authentication using ldap
     -- authentication = "ldap2"
-    -- https://hg.prosody.im/prosody-modules/file/tip/mod_auth_custom_http/mod_auth_custom_http.lua
-    authentication = "custom_http"
-    auth_custom_http = { post_url = "http://10.0.2.2:8000/auth/login-prosody"; }
 
 Component "internal-muc.meet.example.com" "muc"
     modules_enabled = {
         "ping";
-        
+
     }
     storage = "memory"
     muc_room_cache_size = 1000
