@@ -65,7 +65,7 @@ modules_enabled = {
 		--"admin_telnet"; -- Opens telnet console interface on localhost port 5582
 
 	-- HTTP modules
-		"bosh"; -- Enable BOSH clients, aka "Jabber over HTTP"
+		--"bosh"; -- Enable BOSH clients, aka "Jabber over HTTP"
 		--"websocket"; -- XMPP over WebSockets
 		--"http_files"; -- Serve static files from a directory over HTTP
 
@@ -92,7 +92,6 @@ modules_disabled = {
 
 -- Disable account creation by default, for security
 -- For more information see https://prosody.im/doc/creating_accounts
--- https://prosody.im/doc/modules/mod_register
 allow_registration = true
 
 cross_domain_bosh = true
@@ -105,11 +104,11 @@ c2s_require_encryption = false
 -- Force servers to use encrypted connections? This option will
 -- prevent servers from authenticating unless they are using encryption.
 
-s2s_require_encryption = false
+s2s_require_encryption = true
 
 -- Force certificate authentication for server-to-server connections?
 
-s2s_secure_auth = false
+s2s_secure_auth = true
 
 -- Some servers have invalid or self-signed certificates. You can list
 -- remote domains here that will not be required to authenticate using
@@ -129,7 +128,9 @@ pidfile = "/var/run/prosody/prosody.pid"
 -- Select the authentication backend to use. The 'internal' providers
 -- use Prosody's configured data storage to store the authentication data.
 
+-- authentication = "token"
 authentication = "internal_hashed"
+-- authentication = "custom_http"
 
 -- Select the storage backend to use. By default Prosody uses flat files
 -- in its configured data directory, but it also supports more backends
@@ -208,7 +209,7 @@ certificates = "certs"
 --
 --Component "gateway.example.com"
 --	component_secret = "password"
-
+--
 consider_bosh_secure = true
 
 Include "conf.d/*.cfg.lua"
