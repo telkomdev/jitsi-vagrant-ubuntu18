@@ -96,6 +96,10 @@ allow_registration = true
 
 cross_domain_bosh = true
 
+consider_websocket_secure = true;
+
+cross_domain_websocket = true;
+
 -- Force clients to use encrypted connections? This option will
 -- prevent clients from authenticating unless they are using encryption.
 
