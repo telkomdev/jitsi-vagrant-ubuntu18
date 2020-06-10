@@ -22,22 +22,19 @@ local host = module.host;
 function init_session(event)
 	local session, request = event.session, event.request;
 	local query = request.url.query;
-	log("warn",
-                "session:%s, query:%s", session, query);
 
 	if query ~= nil then
-        	local params = formdecode(query);
-        	session.auth_token = query and params.token or nil;
-        	-- previd is used together with https://modules.prosody.im/mod_smacks.html
-        	-- the param is used to find resumed session and re-use anonymous(random) user id
-        	-- (see get_username_from_token)
-		log("info", "My token:%s", session.auth_token);
-        	session.previd = query and params.previd or nil;
+        local params = formdecode(query);
+        session.auth_token = query and params.token or nil;
+        -- previd is used together with https://modules.prosody.im/mod_smacks.html
+        -- the param is used to find resumed session and re-use anonymous(random) user id
+        -- (see get_username_from_token)
+        session.previd = query and params.previd or nil;
 
-        	-- The room name and optional prefix from the bosh query
-        	session.jitsi_bosh_query_room = params.room;
-        	session.jitsi_bosh_query_prefix = params.prefix or "";
-    	end
+        -- The room name and optional prefix from the bosh query
+        session.jitsi_bosh_query_room = params.room;
+        session.jitsi_bosh_query_prefix = params.prefix or "";
+    end
 end
 
 module:hook_global("bosh-session", init_session);
@@ -68,36 +65,41 @@ function provider.delete_user(username)
 end
 
 function provider.get_sasl_handler(session)
-	for k,v in pairs(session) do
- 		log("warn", "table :%s", k);
-	end
 
 	local function get_username_from_token(self, message)
-        	local res, error, reason = token_util:process_and_verify_token(session);
+        local res, error, reason = token_util:process_and_verify_token(session);
 
-        	if (res == false) then
-            		log("warn",
-                		"Error verifying token err:%s, reason:%s", error, reason);
-            		return res, error, reason;
+        if (res == false) then
+            log("warn",
+                "Error verifying token err:%s, reason:%s", error, reason);
+            return res, error, reason;
+        end
+
+		if (session["jitsi_meet_context_user_id"] ~= nil) then
+			log("warn", "user id :%s", session["jitsi_meet_context_user_id"]);
+		end
+		if (session["jitsi_meet_context_user_email"] ~= nil) then
+			log("warn", "user email :%s", session["jitsi_meet_context_user_email"]);
+		end
+
+        local customUsername
+            = prosody.events.fire_event("pre-jitsi-authentication", session);
+		if (session["jitsi_meet_context_user_id"] ~= nil) then
+			self.username = session["jitsi_meet_context_user_id"];
+		elseif (customUsername) then
+            self.username = customUsername;
+        elseif (session.previd ~= nil) then
+            for _, session1 in pairs(sessions) do
+                if (session1.resumption_token == session.previd) then
+                    self.username = session1.username;
+                    break;
+                end
         	end
+        else
+            self.username = message;
+        end
 
-        	local customUsername
-            		= prosody.events.fire_event("pre-jitsi-authentication", session);
-
-        	if (customUsername) then
-            		self.username = customUsername;
-       	 	elseif (session.previd ~= nil) then
-            	for _, session1 in pairs(sessions) do
-                	if (session1.resumption_token == session.previd) then
-                    	self.username = session1.username;
-                    	break;
-                    end
-        	    end
-        	else
-            	self.username = message;
-        	end
-
-        	return res;
+        return res;
 	end
 
 	return new_sasl(host, { anonymous = get_username_from_token });
